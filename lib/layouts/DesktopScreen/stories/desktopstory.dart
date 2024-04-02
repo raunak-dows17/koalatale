@@ -72,15 +72,21 @@ class DesktopStoryInfo extends StatelessWidget {
                                               content["author"]["username"]
                                           ? []
                                           : [
+                                              const Text(
+                                                "~ contributed by",
+                                                style: TextStyle(),
+                                              ),
+                                              const SizedBox(width: 8),
                                               CircleAvatar(
                                                 backgroundImage: NetworkImage(
                                                   content["author"]
                                                       ["profileImage"],
                                                 ),
+                                                radius: 8,
                                               ),
                                               const SizedBox(width: 8),
                                               Text(
-                                                content["author"]["name"],
+                                                content["author"]["username"],
                                                 style: const TextStyle(),
                                               )
                                             ],
@@ -106,6 +112,7 @@ class DesktopStoryInfo extends StatelessWidget {
                                 const SizedBox(height: 16),
                                 ListView.builder(
                                   shrinkWrap: true,
+                                  physics: const ScrollPhysics(),
                                   itemCount:
                                       (snapshot.data!["contributions"] as List?)
                                               ?.length ??
@@ -121,6 +128,9 @@ class DesktopStoryInfo extends StatelessWidget {
                                           ["profileImage"],
                                       username: contributions["author"]
                                           ["username"],
+                                      createdAt: contributions["createdAt"],
+                                      voteCount: contributions["voteCount"],
+                                      votes: contributions["votes"],
                                     );
                                   },
                                 ),

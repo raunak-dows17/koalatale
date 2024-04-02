@@ -89,7 +89,7 @@ class StoryCard extends StatelessWidget {
                             Align(
                               widthFactor: 0.5,
                               child: CircleAvatar(
-                                radius: 16,
+                                radius: 10,
                                 backgroundImage: NetworkImage(storyInfo[
                                             "contributions"][i]["author"]
                                         ["profileImage"] ??
@@ -98,7 +98,7 @@ class StoryCard extends StatelessWidget {
                             ),
                           storyInfo["contributions"].length > 5
                               ? CircleAvatar(
-                                  radius: 16,
+                                  radius: 10,
                                   backgroundColor: AppColors.backgroundColor,
                                   child: Text(
                                       (storyInfo["contributions"].length - 5)
