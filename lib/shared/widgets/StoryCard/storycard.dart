@@ -83,23 +83,28 @@ class StoryCard extends StatelessWidget {
                 storyInfo["contributions"].length > 0
                     ? Row(
                         children: [
-                          for (int i = 0; i < 5; i++)
+                          for (int i = 0;
+                              i < storyInfo["contributions"].length;
+                              i++)
                             Align(
                               widthFactor: 0.5,
                               child: CircleAvatar(
-                                radius: 50,
+                                radius: 16,
                                 backgroundImage: NetworkImage(storyInfo[
                                             "contributions"][i]["author"]
-                                        ["profilePicture"] ??
+                                        ["profileImage"] ??
                                     "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/1200px-Default_pfp.svg.png"),
                               ),
                             ),
-                          CircleAvatar(
-                            radius: 50,
-                            backgroundColor: AppColors.backgroundColor,
-                            child: Text((storyInfo["contributions"].length - 5)
-                                .toString()),
-                          )
+                          storyInfo["contributions"].length > 5
+                              ? CircleAvatar(
+                                  radius: 16,
+                                  backgroundColor: AppColors.backgroundColor,
+                                  child: Text(
+                                      (storyInfo["contributions"].length - 5)
+                                          .toString()),
+                                )
+                              : const SizedBox(width: 0)
                         ],
                       )
                     : const SizedBox()

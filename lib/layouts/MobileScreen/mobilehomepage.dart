@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:koalatale/utils/Apis/stories.dart';
 import '../../shared/colors.dart';
 import '../../shared/widgets/Navbar/mobilenavbar.dart';
 import '../../shared/widgets/SideBar/sidebar.dart';
@@ -36,7 +37,7 @@ class MobileHomeScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "Hello Raunak!",
+                    "Hello!",
                     style: TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.w700,
@@ -88,7 +89,7 @@ class MobileHomeScreen extends StatelessWidget {
                 children: stories
                     .map(
                       (e) => FutureBuilder(
-                          future: Future.value(stories),
+                          future: Stories().getStories(),
                           builder: (context, snapshot) {
                             if (snapshot.hasData) {
                               return StoryCard(storyInfo: e);
@@ -108,7 +109,11 @@ class MobileHomeScreen extends StatelessWidget {
                                 ),
                               );
                             } else {
-                              return const LinearProgressIndicator();
+                              return LinearProgressIndicator(
+                                color: AppColors.secondaryColor,
+                                backgroundColor: AppColors.tertiaryColor,
+                                borderRadius: BorderRadius.circular(20),
+                              );
                             }
                           }),
                     )

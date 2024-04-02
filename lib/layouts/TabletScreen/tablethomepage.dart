@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:koalatale/utils/Apis/stories.dart';
 import '../../shared/colors.dart';
 import '../../shared/widgets/Navbar/navbar.dart';
 import '../../shared/widgets/SideBar/sidebar.dart';
@@ -86,7 +87,7 @@ class TabletHomeScreen extends StatelessWidget {
                 children: stories
                     .map(
                       (e) => FutureBuilder(
-                          future: Future.value(e),
+                          future: Stories().getStories(),
                           builder: (context, snapshot) {
                             if (snapshot.hasData) {
                               return StoryCard(storyInfo: e);
@@ -106,7 +107,11 @@ class TabletHomeScreen extends StatelessWidget {
                                 ),
                               );
                             } else {
-                              return const LinearProgressIndicator();
+                              return LinearProgressIndicator(
+                                color: AppColors.secondaryColor,
+                                backgroundColor: AppColors.tertiaryColor,
+                                borderRadius: BorderRadius.circular(20),
+                              );
                             }
                           }),
                     )

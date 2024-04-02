@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:koalatale/shared/colors.dart';
+import 'package:koalatale/shared/widgets/Contributions/contributioncard.dart';
 import '../../../shared/widgets/Navbar/navbar.dart';
 import '../../../shared/widgets/SideBar/sidebar.dart';
 
@@ -60,21 +62,47 @@ class DesktopStoryInfo extends StatelessWidget {
                                 final content =
                                     snapshot.data!["content"]?[index];
                                 return Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(content?["text"]),
                                     Row(
                                       mainAxisAlignment: MainAxisAlignment.end,
-                                      children: [],
+                                      children: storyInfo!["author"]
+                                                  ["username"] ==
+                                              content["author"]["username"]
+                                          ? []
+                                          : [
+                                              CircleAvatar(
+                                                backgroundImage: NetworkImage(
+                                                  content["author"]
+                                                      ["profileImage"],
+                                                ),
+                                              ),
+                                              const SizedBox(width: 8),
+                                              Text(
+                                                content["author"]["name"],
+                                                style: const TextStyle(),
+                                              )
+                                            ],
                                     )
                                   ],
                                 );
                               },
                             ),
 
+                            const SizedBox(height: 24),
                             // Contributions
                             Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                const Text("Contributions"),
+                                Text(
+                                  "Contributions",
+                                  style: TextStyle(
+                                    color: AppColors.primaryTextColor,
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
                                 const SizedBox(height: 16),
                                 ListView.builder(
                                   shrinkWrap: true,
@@ -85,15 +113,14 @@ class DesktopStoryInfo extends StatelessWidget {
                                   itemBuilder: (context, index) {
                                     final contributions =
                                         snapshot.data!["contributions"]?[index];
-                                    return Column(
-                                      children: [
-                                        Text(contributions?["text"]),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.end,
-                                          children: [],
-                                        )
-                                      ],
+                                    return ContributionCard(
+                                      id: contributions["_id"],
+                                      content: contributions["content"],
+                                      name: contributions["author"]["name"],
+                                      profileImage: contributions["author"]
+                                          ["profileImage"],
+                                      username: contributions["author"]
+                                          ["username"],
                                     );
                                   },
                                 ),
@@ -119,6 +146,11 @@ class DesktopStoryInfo extends StatelessWidget {
                   }),
             ),
           ),
+          Expanded(
+              flex: 1,
+              child: Container(
+                  decoration: BoxDecoration(color: Colors.white),
+                  child: Column()))
         ],
       ),
     );

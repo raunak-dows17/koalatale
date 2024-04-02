@@ -44,7 +44,7 @@ class DesktopHomePage extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Hello Raunak!",
+                          "Hello!",
                           style: TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.w700,
