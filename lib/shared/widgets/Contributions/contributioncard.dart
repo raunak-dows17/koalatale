@@ -116,7 +116,7 @@ class _ContributionCardState extends State<ContributionCard> {
                         color: isLiked ? Colors.redAccent : Colors.black,
                       ),
                     ),
-                    const SizedBox(width: 12),
+                    // const SizedBox(width: 4),
                     Text(widget.voteCount.toString())
                   ],
                 ),
@@ -126,7 +126,7 @@ class _ContributionCardState extends State<ContributionCard> {
                 ),
               ],
             ),
-            SizedBox(height: 10),
+            if (errorMessage != null) const SizedBox(height: 10),
             if (errorMessage != null)
               Text(
                 errorMessage ?? "",

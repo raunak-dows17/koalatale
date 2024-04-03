@@ -16,14 +16,14 @@ class AppRouter {
         }),
         routes: [
           GoRoute(
-            path: "login",
+            path: "auth/login",
             name: RouteNames.loginpage,
             pageBuilder: ((context, state) {
               return const MaterialPage(child: LoginPage());
             }),
           ),
           GoRoute(
-            path: "signup",
+            path: "auth/signup",
             name: RouteNames.signuppage,
             pageBuilder: ((context, state) {
               return const MaterialPage(child: SignUpPage());

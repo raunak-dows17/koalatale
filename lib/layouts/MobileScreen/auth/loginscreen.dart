@@ -36,7 +36,7 @@ class _MobileLoginScreenState extends State<MobileLoginScreen> {
           children: [
             Container(
               width: double.infinity,
-              height: MediaQuery.of(context).size.height / 2.5,
+              height: MediaQuery.of(context).size.height / 4,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(30),
               ),
@@ -66,6 +66,7 @@ class _MobileLoginScreenState extends State<MobileLoginScreen> {
                 )
               ],
             ),
+            const SizedBox(height: 15),
             Form(
               key: formKey,
               child: Column(
@@ -91,7 +92,7 @@ class _MobileLoginScreenState extends State<MobileLoginScreen> {
                       labelText: "Username",
                     ),
                   ),
-                  const SizedBox(height: 30),
+                  const SizedBox(height: 15),
                   TextFormField(
                     validator: (value) {
                       if (value == null || value.isEmpty) {
@@ -125,7 +126,7 @@ class _MobileLoginScreenState extends State<MobileLoginScreen> {
                     ),
                   ),
                   const SizedBox(
-                    height: 40,
+                    height: 20,
                   ),
                   Container(
                     width: double.infinity,
@@ -157,15 +158,18 @@ class _MobileLoginScreenState extends State<MobileLoginScreen> {
                 ],
               ),
             ),
+            const SizedBox(
+              height: 20,
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Text("Don't have an account on koalatale"),
+                const Text("Don't have an account on koalatale? "),
                 const SizedBox(width: 4),
                 InkWell(
                   onTap: () => context.goNamed(RouteNames.signuppage),
                   child: Text(
-                    "Sign UP",
+                    " Sign UP",
                     style: TextStyle(color: AppColors.primaryTextColor),
                   ),
                 )

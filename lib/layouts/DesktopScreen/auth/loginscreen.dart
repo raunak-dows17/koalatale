@@ -146,7 +146,7 @@ class _DesktopLoginScreenState extends State<DesktopLoginScreen> {
                                   TokenDetails()
                                       .setToken(value)
                                       .then((value) => context.pop());
-                                }).catchError((err) => print(err));
+                                }).catchError((err) => null);
                               }
                             },
                             style: const ButtonStyle(

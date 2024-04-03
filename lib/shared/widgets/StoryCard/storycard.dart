@@ -64,7 +64,7 @@ class StoryCard extends StatelessWidget {
                 const SizedBox(
                   width: 6,
                 ),
-                Text(storyInfo["author"]["name"]),
+                Text(storyInfo["author"]["username"]),
               ],
             ),
             const Divider(),
@@ -73,9 +73,9 @@ class StoryCard extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                    const Text("Contributions"),
+                    const Text("Contributions:"),
                     const SizedBox(
-                      width: 12,
+                      width: 4,
                     ),
                     Text(storyInfo["contributions"].length.toString()),
                   ],
