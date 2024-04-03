@@ -7,7 +7,7 @@ class TokenDetails {
     return await storage.read(key: "kt_token");
   }
 
-  Future setToken(token) async {
+  Future setToken(String token) async {
     return await storage.write(key: "kt_token", value: token);
   }
 

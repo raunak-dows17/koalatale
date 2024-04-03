@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:koalatale/router/routenames.dart';
 
 class Navbar extends StatelessWidget implements PreferredSize {
   const Navbar({super.key});
@@ -19,7 +21,9 @@ class Navbar extends StatelessWidget implements PreferredSize {
       ),
       actions: [
         ElevatedButton(
-          onPressed: () {},
+          onPressed: () {
+            context.goNamed(RouteNames.loginpage);
+          },
           child: const Text(
             "Login",
             style: TextStyle(color: Colors.white),

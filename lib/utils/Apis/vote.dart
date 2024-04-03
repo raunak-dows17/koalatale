@@ -7,11 +7,6 @@ import 'package:koalatale/utils/Apis/baseurl.dart';
 class VoteAConrtibution {
   Future<Map> handleVotes(contributionId, String token) async {
     try {
-      // String? token = await TokenDetails().getToken();
-      // if (token == null) {
-      //   throw Error();
-      // }
-
       Response response = await post(
           Uri.parse("$baseUrl/contribution/$contributionId/vote"),
           headers: {
