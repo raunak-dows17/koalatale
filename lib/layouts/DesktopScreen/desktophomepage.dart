@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:koalatale/utils/Apis/user.dart';
 import 'package:koalatale/utils/Tokens/tokens.dart';
 import '../../shared/colors.dart';
 import '../../shared/widgets/Navbar/navbar.dart';
@@ -16,17 +18,15 @@ class DesktopHomePage extends StatefulWidget {
 }
 
 class _DesktopHomePageState extends State<DesktopHomePage> {
-  bool hasToken = false;
+  String token = "";
   final ScrollController _scrollController = ScrollController();
   final bool _showImageAndText = true;
 
   @override
   void initState() {
-    TokenDetails().hasToken().then((value) {
-      setState(() {
-        hasToken = value;
-      });
-    });
+    TokenDetails().getToken().then((value) => setState(() {
+          value != null ? token = value : token = "";
+        }));
     super.initState();
   }
 
@@ -68,19 +68,36 @@ class _DesktopHomePageState extends State<DesktopHomePage> {
                               duration: const Duration(milliseconds: 500),
                               child: Container(
                                 padding: const EdgeInsets.all(20),
-                                margin: EdgeInsets.only(bottom: 24),
+                                margin: const EdgeInsets.only(bottom: 24),
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text(
-                                      "Hello!",
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.w700,
-                                        fontSize: imageHeight * 0.1,
-                                      ),
-                                    ),
+                                    FutureBuilder(
+                                        future: User().getUserData(token),
+                                        builder: (context, snapshot) {
+                                          if (snapshot.hasData) {
+                                            return Text(
+                                              "Hello! ${snapshot.data!['username']}",
+                                              style: TextStyle(
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.w700,
+                                                fontSize: imageHeight * 0.1,
+                                              ),
+                                            );
+                                          } else if (snapshot.hasError) {
+                                            return Text(
+                                              "Hello!",
+                                              style: TextStyle(
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.w700,
+                                                fontSize: imageHeight * 0.1,
+                                              ),
+                                            );
+                                          } else {
+                                            return CircularProgressIndicator();
+                                          }
+                                        }),
                                     SizedBox(height: imageHeight * 0.03),
                                     Text(
                                       "Inspires the stories, Inspired by stories",
@@ -102,7 +119,7 @@ class _DesktopHomePageState extends State<DesktopHomePage> {
                 ),
                 SliverGrid(
                   gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                    maxCrossAxisExtent: 269,
+                    maxCrossAxisExtent: 300,
                     crossAxisSpacing: 8,
                     mainAxisSpacing: 8,
                     childAspectRatio: 0.8,

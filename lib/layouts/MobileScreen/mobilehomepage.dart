@@ -1,39 +1,37 @@
 import 'package:flutter/material.dart';
+import 'package:koalatale/shared/widgets/Navbar/navbar.dart';
 import 'package:koalatale/utils/Apis/stories.dart';
 import 'package:koalatale/utils/Tokens/tokens.dart';
 import '../../shared/colors.dart';
-import '../../shared/widgets/Navbar/mobilenavbar.dart';
 import '../../shared/widgets/SideBar/sidebar.dart';
 import '../../shared/widgets/StoryCard/storycard.dart';
 
 class MobileHomeScreen extends StatefulWidget {
   final List stories;
 
-  MobileHomeScreen({super.key, required this.stories});
+  const MobileHomeScreen({super.key, required this.stories});
 
   @override
   State<MobileHomeScreen> createState() => _MobileHomeScreenState();
 }
 
 class _MobileHomeScreenState extends State<MobileHomeScreen> {
-  bool hasToken = false;
-  ScrollController _scrollController = ScrollController();
-  bool _showImageAndText = true;
+  String token = "";
+  final ScrollController _scrollController = ScrollController();
+  final bool _showImageAndText = true;
 
   @override
   void initState() {
-    TokenDetails().hasToken().then(
-          (value) => setState(() {
-            hasToken = value;
-          }),
-        );
+    TokenDetails().getToken().then((value) => setState(() {
+          value != null ? token = value : token = "";
+        }));
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: MobileNavbar(),
+      appBar: Navbar(),
       drawer: SideNavbar(),
       body: CustomScrollView(
         controller: _scrollController,

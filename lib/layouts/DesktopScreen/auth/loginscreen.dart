@@ -23,6 +23,10 @@ class _DesktopLoginScreenState extends State<DesktopLoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+      ),
       body: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -145,8 +149,26 @@ class _DesktopLoginScreenState extends State<DesktopLoginScreen> {
                                 Auth().login(formData).then((value) {
                                   TokenDetails()
                                       .setToken(value)
-                                      .then((value) => context.pop());
-                                }).catchError((err) => null);
+                                      .then((v) => context.go("/"));
+                                }).catchError((err) {
+                                  showDialog(
+                                    context: context,
+                                    builder: (BuildContext context) {
+                                      return AlertDialog(
+                                        title: Text("Error"),
+                                        content: SelectableText(err.toString()),
+                                        actions: [
+                                          TextButton(
+                                            onPressed: () {
+                                              Navigator.of(context).pop();
+                                            },
+                                            child: Text("OK"),
+                                          ),
+                                        ],
+                                      );
+                                    },
+                                  );
+                                });
                               }
                             },
                             style: const ButtonStyle(
@@ -166,12 +188,11 @@ class _DesktopLoginScreenState extends State<DesktopLoginScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Text("Don't have an account on koalatale"),
-                      SizedBox(width: 4),
+                      const Text("Don't have an account on koalatale "),
                       InkWell(
                         onTap: () => context.goNamed(RouteNames.signuppage),
                         child: Text(
-                          "Sign UP",
+                          "Signup",
                           style: TextStyle(color: AppColors.primaryTextColor),
                         ),
                       )

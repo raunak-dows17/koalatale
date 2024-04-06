@@ -28,25 +28,14 @@ class _MobileLoginScreenState extends State<MobileLoginScreen> {
         elevation: 0,
       ),
       body: Container(
-        padding: const EdgeInsets.all(28),
+        padding: const EdgeInsets.all(12),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           mainAxisSize: MainAxisSize.max,
           children: [
-            Container(
-              width: double.infinity,
-              height: MediaQuery.of(context).size.height / 4,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(30),
-              ),
-              clipBehavior: Clip.antiAlias,
-              child: Image.asset(
-                "assets/images/loginImage.jpg",
-                fit: BoxFit.cover,
-              ),
-            ),
             Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SelectableText(
                   "Welcome Back To Koalatale !!!",
@@ -161,15 +150,14 @@ class _MobileLoginScreenState extends State<MobileLoginScreen> {
             const SizedBox(
               height: 20,
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+            Wrap(
+              crossAxisAlignment: WrapCrossAlignment.start,
               children: [
                 const Text("Don't have an account on koalatale? "),
-                const SizedBox(width: 4),
                 InkWell(
                   onTap: () => context.goNamed(RouteNames.signuppage),
                   child: Text(
-                    " Sign UP",
+                    "SignUp",
                     style: TextStyle(color: AppColors.primaryTextColor),
                   ),
                 )

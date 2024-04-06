@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:koalatale/shared/colors.dart';
 import 'package:koalatale/shared/widgets/Contributions/contributioncard.dart';
-import '../../../shared/widgets/Navbar/mobilenavbar.dart';
+import 'package:koalatale/shared/widgets/Navbar/navbar.dart';
 import '../../../shared/widgets/SideBar/sidebar.dart';
 
 class MobileStoryInfo extends StatelessWidget {
@@ -12,7 +12,7 @@ class MobileStoryInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: MobileNavbar(),
+      appBar: Navbar(),
       drawer: SideNavbar(),
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,

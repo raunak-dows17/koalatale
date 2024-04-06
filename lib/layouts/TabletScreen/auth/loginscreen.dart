@@ -29,23 +29,12 @@ class _TabletLoginScreenState extends State<TabletLoginScreen> {
       ),
       body: Container(
         padding: const EdgeInsets.all(28),
+        alignment: Alignment.center,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           mainAxisSize: MainAxisSize.max,
           children: [
-            Container(
-              width: double.infinity,
-              height: MediaQuery.of(context).size.height / 2.5,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(30),
-              ),
-              clipBehavior: Clip.antiAlias,
-              child: Image.asset(
-                "assets/images/loginImage.jpg",
-                fit: BoxFit.cover,
-              ),
-            ),
             Column(
               children: [
                 SelectableText(
@@ -158,8 +147,8 @@ class _TabletLoginScreenState extends State<TabletLoginScreen> {
                 ],
               ),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+            Wrap(
+              crossAxisAlignment: WrapCrossAlignment.center,
               children: [
                 const Text("Don't have an account on koalatale"),
                 const SizedBox(width: 4),

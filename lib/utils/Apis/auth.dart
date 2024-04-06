@@ -14,11 +14,16 @@ class Auth {
         body: jsonEncode(formData),
       );
 
-      Map data = jsonDecode(response.body);
-
-      return Future.value(data["token"]);
+      if (response.statusCode == 201) {
+        Map data = jsonDecode(response.body);
+        return data["token"];
+      } else {
+        Map<String, dynamic> errorBody = jsonDecode(response.body);
+        String errorMessage = errorBody["message"] ?? "An error occurred";
+        return Future.error(errorMessage);
+      }
     } catch (e) {
-      return Future.error(jsonDecode(e.toString()));
+      return Future.error(e);
     }
   }
 }

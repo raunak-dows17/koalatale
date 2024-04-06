@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:koalatale/shared/colors.dart';
 import 'package:koalatale/shared/datetime.dart';
+import 'package:koalatale/utils/Apis/user.dart';
 import 'package:koalatale/utils/Apis/vote.dart';
 import 'package:koalatale/utils/Tokens/tokens.dart';
 
@@ -57,6 +58,23 @@ class _ContributionCardState extends State<ContributionCard> {
 
   @override
   void initState() {
+    TokenDetails().getToken().then((value) => {
+          if (value != null)
+            {
+              User().getUserData(value).then((value) {
+                if (widget.votes.any(
+                    (element) => element["username"] == value["username"])) {
+                  setState(() {
+                    isLiked = true;
+                  });
+                } else {
+                  setState(() {
+                    isLiked = false;
+                  });
+                }
+              })
+            }
+        });
     super.initState();
   }
 

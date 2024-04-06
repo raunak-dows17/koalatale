@@ -16,15 +16,15 @@ class TabletHomeScreen extends StatefulWidget {
 }
 
 class _TabletHomeScreenState extends State<TabletHomeScreen> {
-  bool hasToken = false;
+  String token = "";
   ScrollController _scrollController = ScrollController();
   bool _showImageAndText = true;
 
   @override
   void initState() {
-    TokenDetails().hasToken().then(
+    TokenDetails().getToken().then(
           (value) => setState(() {
-            hasToken = value;
+            value != null ? token = value : token = "";
           }),
         );
     super.initState();
